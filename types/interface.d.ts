@@ -1,4 +1,4 @@
-interface DialogFormElement {
+type DialogFormElement = {
 	label: string
 	description?: string
 	type: 'text' | 'number' | 'checkbox' | 'select' | 'radio' | 'textarea' | 'vector' | 'color' | 'file' | 'folder' | 'save' | 'info' 
@@ -13,14 +13,27 @@ interface DialogFormElement {
 	step?: number
 	height?: number
 	options?: object
+	condition?:Condition
+} | {
+    text: string
+    type: 'info'
+} | {
+	options?: object
+    type: 'select'
 }
-interface DialogOptions {
-	title: string
+
+
+
+type DialogForm = {[formElement: string]: '_' | DialogFormElement}
+
+interface DialogOptions<D extends DialogForm> {
+	title?: string
 	id: string
+	draggable?:boolean
 	/**
 	 * Array of HTML object strings for each line of content in the dialog.
 	 */
-	lines: string[]
+	lines?: string[]
 	/**
 	 *  If false, the confirm button of the dialog is disabled
 	 */
@@ -32,7 +45,7 @@ interface DialogOptions {
 	/**
 	 *  Function to execute when the user confirms the dialog
 	 */
-	onConfirm?: (formResult: object) => void
+	onConfirm?: (formResult: D) => void
 	/**
 	 *  Function to execute when the user cancels the dialog
 	 */
@@ -40,19 +53,19 @@ interface DialogOptions {
 	/**
 	 * Creates a form in the dialog
 	 */
-	form?: {
-		[formElement: string]: '_' | DialogFormElement
-	}
+	form?: D
 	/**
 	 * Vue component
 	 */
-	component: Vue.Component
+
+	component?: Vue.Component
+
 }
 
-declare class Dialog {
-	constructor (options: DialogOptions)
-	show: () => Dialog
-	hide: () => Dialog
+declare class Dialog<D extends DialogForm> {
+	constructor (options: DialogOptions<D>)
+	show: () => this
+	hide: () => this
 	/**
 	 * Triggers the confirm event of the dialog.
 	 */

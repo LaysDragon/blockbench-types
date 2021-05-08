@@ -6,7 +6,7 @@ type ArrayVector2 = [number, number]
  * @private
  */
 declare class OutlinerNode {
-	constructor ()
+	constructor()
 	uuid: string
 	export: boolean
 	locked: boolean
@@ -43,7 +43,7 @@ declare class OutlinerNode {
 	 * Checks of the group or element is a child of `group`.
 	 * @param max_levels The maximum number of generations that can be between the element and the group
 	 */
-	isChildOf: ( group: Group, max_levels: number ) => boolean
+	isChildOf: (group: Group, max_levels: number) => boolean
 	/**
 	 * Displays the context menu of the element
 	 * @param event Mouse event, determines where the context menu spawns.
@@ -55,7 +55,7 @@ declare class OutlinerNode {
  * @private
  */
 declare class OutlinerElement extends OutlinerNode {
-	constructor ()
+	constructor()
 	selected: boolean
 	static fromSave: (data: object, keep_uuid?: boolean) => OutlinerElement
 	static isParent: false
@@ -83,7 +83,7 @@ interface GroupOptions {
 }
 
 declare class Group extends OutlinerNode {
-	constructor (options: Partial<GroupOptions>)
+	constructor(options: Partial<GroupOptions>)
 	static selected: Group
 	static all: Group[]
 
@@ -97,6 +97,11 @@ declare class Group extends OutlinerNode {
 	isOpen: boolean
 	ik_enabled: boolean
 	ik_chain_length: number
+
+	origin: ArrayVector3
+	rotation: ArrayVector3
+
+	mesh: THREE.Mesh
 
 	extend: (options: Partial<GroupOptions>) => this
 	selectChildren: (event: Event) => this
@@ -152,7 +157,7 @@ interface CubeOptions {
 	uv_offset: ArrayVector2
 }
 declare class Cube extends OutlinerElement {
-	constructor (options: Partial<CubeOptions>, uuid?: string)
+	constructor(options: Partial<CubeOptions>, uuid?: string)
 	autouv: 1 | 2 | 3
 	shade: boolean
 	mirror_uv: boolean
@@ -167,6 +172,7 @@ declare class Cube extends OutlinerElement {
 	 */
 	uv_offset: ArrayVector2
 	extend(options: Partial<CubeOptions>): this
+	applyTexture(texture: Texture, faces: CubeFaces[] | boolean): void
 
 	static all: Cube[]
 	static selected: Cube[]
@@ -180,7 +186,7 @@ interface LocatorOptions {
 }
 
 declare class Locator extends OutlinerElement {
-	constructor (options: Partial<LocatorOptions>, uuid?: string)
+	constructor(options: Partial<LocatorOptions>, uuid?: string)
 
 	extend(options: Partial<LocatorOptions>)
 	flip(axis: number, center: number): this

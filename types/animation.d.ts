@@ -8,8 +8,10 @@ interface AnimationOptions {
     snapping?: number
 }
 
-class Animation {
+declare class Animation {
     constructor(data: AnimationOptions);
+    name: string;
+
     extend(data: AnimationOptions): this;
     getUndoCopy(options: any, save: any): {
         uuid: any;
@@ -31,7 +33,7 @@ class Animation {
     togglePlayingState(state: any): any;
     showContextMenu(event: any): this;
     getBoneAnimator(group: any): any;
-    add(undo: any): this;
+    add(undo?: boolean): this;
     remove(undo: any, remove_from_file?: boolean): this;
     getMaxLength(): any;
     setLoop(value: any, undo: any): void;
@@ -39,19 +41,20 @@ class Animation {
     propertiesDialog(): void;
 }
 
-namespace Animator {
+declare namespace Animator {
     const open: boolean
-    const MolangParser: object
+    const MolangParser: MolangParser
     const motion_trail: THREE.Object3D
     const motion_trail_lock: boolean
     const particle_effects: object
+    let animations: Animation[];
     function showDefaultPose(no_matrix_update?: boolean): void
     function resetParticles(): void
     function showMotionTrail(target?: Group): void
     /**
      * Updates the preview based on the current time
      */
-    function preview(): void
+    function preview(in_loop?: boolean): void
     function loadParticleEmitter(path: string, content: string): void
     /**
      * Import a Bedrock animation file

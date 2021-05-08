@@ -67,7 +67,7 @@ declare const Canvas: {
      * Redraw the selected elements in the scene
      * @param arr Optionally specify an array of elements to update
      */
-    
+
     updateSelected(arr: any): void;
     /**
      * Update positions and shapes of the selected elements
@@ -84,7 +84,7 @@ declare const Canvas: {
     /**
      * Update the hierarchy and position of all bones
      */
-    updateAllBones(): void;
+    updateAllBones(bones?: Group[]): void;
     /**
      * Update the position of the origin / pivot point gizmo
      */

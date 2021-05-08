@@ -18,6 +18,10 @@
 /// <reference types="./textures" />
 /// <reference types="./timeline" />
 /// <reference types="./util" />
+/// <reference types="./patch" />
+/// <reference types="./global" />
+/// <reference types="./lib/lib.dom" />
+/// <reference types="./lib/lib.dom.iterable" />
 
 
 declare class Deletable {
@@ -72,17 +76,17 @@ interface MessageBoxOptions {
 	/**
 	 * Index of the confirm button within the buttons array
 	 */
-	confirm: number
+	confirm?: number
 	/**
 	 * Index of the cancel button within the buttons array
 	 */
-	cancel: number
+	cancel?: number
 	buttons: string[]
 	translateKey?: string
 	title?: string
 	message?: string
 	icon?: string
-	width: number
+	width?: number
 }
 
 declare namespace Blockbench {
@@ -143,7 +147,7 @@ declare namespace Blockbench {
 	/**
 	 * Opens a message box
 	 */
-	function showMessageBox(options: MessageBoxOptions, callback: (buttonID: number) => void): void
+	function showMessageBox(options: MessageBoxOptions, callback?: (buttonID: number) => void): void
 
 	function textPrompt(title: string, value: string, callback: (value: string) => void): void
 	/**
@@ -172,6 +176,8 @@ declare namespace Blockbench {
 
 	function addListener(event_names: EventName, callback: (data: object) => void): void
 	function on(event_names: EventName, callback: (data: object) => void): void
+	function removeListener(event_names: EventName, callback: (data: object) => void): void
+
 
 	function removeEventListener(event_names: EventName): void
 }
@@ -180,16 +186,17 @@ declare namespace Blockbench {
 interface PluginData {
 	title: string
 	author: string
+	version: string
 	description: string
 	icon: string
 	variant: 'desktop' | 'web' | 'both'
 	about?: string
-	min_version: string
-	max_version: string
+	min_version?: string
+	max_version?: string
 	onload: () => void
 	onunload: () => void
-	oninstall: () => void
-	onuninstall: () => void
+	oninstall?: () => void
+	onuninstall?: () => void
 }
 
 declare class Plugin {
@@ -197,7 +204,7 @@ declare class Plugin {
 	constructor()
 }
 
-type Condition = any
+type Condition = undefined | boolean | ((context?: any) => void) | { modes?: string[], formats?: string[], tools?: string[], method?: ((context?: any) => void) }
 
 interface PanelOptions {
 	id: string
@@ -215,7 +222,8 @@ interface PanelOptions {
 	insert_after: any
 }
 declare class Panel {
-	constructor (options: PanelOptions)
+	constructor(options: Partial<PanelOptions>);
+	toolbars: Record<string, Toolbar>;
 }
 
 
@@ -236,28 +244,28 @@ interface PropertyOptions {
  * Creates a new property on the specified target class
  */
 declare class Property extends Deletable {
-    constructor(target_class: any, type: string, name: string, options?: PropertyOptions);
-    class: any;
-    name: string;
-    type: string;
+	constructor(target_class: any, type: string, name: string, options?: PropertyOptions);
+	class: any;
+	name: string;
+	type: string;
 	default: any;
-	
-    isString: boolean;
-    isMolang: boolean;
-    isNumber: boolean;
-    isBoolean: boolean;
-    isArray: boolean;
-    isVector: boolean;
+
+	isString: boolean;
+	isMolang: boolean;
+	isNumber: boolean;
+	isBoolean: boolean;
+	isArray: boolean;
+	isVector: boolean;
 	isVector2: boolean;
-	
-    merge_validation: undefined | ((value: any) => boolean);
-    condition: any;
-    exposed: boolean;
-    label: any;
+
+	merge_validation: undefined | ((value: any) => boolean);
+	condition: any;
+	exposed: boolean;
+	label: any;
 	merge: (instance: any, data: object) => void
 	reset: (instance: any) => void
-    getDefault(instance: any): any;
-    copy(instance: any, target: any): void;
+	getDefault(instance: any): any;
+	copy(instance: any, target: any): void;
 }
 
 declare function updateSelection(): void

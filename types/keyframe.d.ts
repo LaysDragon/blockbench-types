@@ -10,16 +10,20 @@ interface KeyframeOptions {
 type axisLetter = 'x' | 'y' | 'z'
 
 
-declare class Keyframe {
+declare class Keyframe<AXIS extends string = axisLetter> {
     constructor(options: KeyframeOptions, uuid: any);
+    time:number;
+    channel:string;
+    data_points:Partial<AXIS>[]
+
     extend(data: KeyframeOptions): this;
-    get(axis: axisLetter, data_point?: number): any;
-    calc(axis: axisLetter, data_point?: number): any;
-    set(axis: axisLetter, value: any, data_point?: number): this;
-    offset(axis: axisLetter, amount: any, data_point?: number): any;
-    flip(axis: axisLetter): this;
-    getLerp(other: any, axis: axisLetter, amount: any, allow_expression: any): any;
-    getCatmullromLerp(before_plus: Keyframe, before: Keyframe, after: Keyframe, after_plus: Keyframe, axis: axisLetter, alpha: number): any;
+    get(axis: AXIS, data_point?: number): any;
+    calc(axis: AXIS, data_point?: number): any;
+    set(axis: AXIS, value: any, data_point?: number): this;
+    offset(axis: AXIS, amount: any, data_point?: number): any;
+    flip(axis: AXIS): this;
+    getLerp(other: any, axis: AXIS, amount: any, allow_expression: any): any;
+    getCatmullromLerp(before_plus: Keyframe, before: Keyframe, after: Keyframe, after_plus: Keyframe, axis: AXIS, alpha: number): any;
     getArray(data_point?: number): any[];
     getFixed(data_point?: number): any;
     getTimecodeString(): string;

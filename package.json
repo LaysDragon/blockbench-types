@@ -19,6 +19,8 @@
   "homepage": "https://github.com/JannisX11/blockbench-types#readme",
   "dependencies": {
     "@types/jquery": "^3.5.4",
+    "@types/node": "^15.0.2",
+    "electron": "^8.5.5",
     "three": "^0.120.0",
     "vue": "^2.6.12",
     "wintersky": "^0.2.0"

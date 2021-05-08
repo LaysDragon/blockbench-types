@@ -35,6 +35,7 @@ interface BarItemOptions extends KeybindItemOptions {
 }
 declare class BarItem extends KeybindItem {
     constructor(id: string, options: BarItemOptions);
+    click(event?: Event): void
     conditionMet(): boolean;
     addLabel(in_bar: any, action: any): void;
     getNode(): HTMLElement;
@@ -46,7 +47,7 @@ interface ActionOptions extends BarItemOptions {
     click(event: Event): void
     color?: string
     linked_setting?: string
-    children?: object[]
+    children?: ()=>any[]
     /**
      * Show the full label in toolbars
      */
@@ -54,11 +55,12 @@ interface ActionOptions extends BarItemOptions {
 }
 declare class Action extends BarItem {
     constructor(id: string, options: ActionOptions);
-    trigger(event: Event): boolean;
+    trigger(event?: Event): boolean;
     updateKeybindingLabel(): this;
     setIcon(icon: string): void;
     toggleLinkedSetting(change: any): void;
     nodes: HTMLElement[]
+    children:()=>any[]
 }
 
 interface ToolOptions extends ActionOptions {
@@ -79,6 +81,9 @@ declare class Widget extends BarItem {
 }
 declare class NumSlider extends Widget {
     constructor(id: string, options: object);
+
+    jq_inner:JQuery<HTMLElement>;
+
     startInput(event: Event): void;
     setWidth(width: any): this;
     getInterval(event: Event): any;
@@ -123,13 +128,15 @@ declare class ColorPicker extends Widget {
 }
 declare class Toolbar {
     constructor(data: any);
+    children: BarItem[];
+    id:string;
     build(data: any, force: any): this;
     contextmenu(event: Event): void;
     editMenu(): this;
     add(action: any, position: any): this;
     remove(action: any): this;
     update(): this;
-    toPlace(place: any): this;
+    toPlace(place?: string): this;
     save(): this;
     reset(): this;
 }
@@ -162,6 +169,6 @@ declare namespace Keybinds {
     const stored: {};
     const extra: {};
     const structure: {};
-    function save (): void;
-    function reset (): void;
+    function save(): void;
+    function reset(): void;
 }

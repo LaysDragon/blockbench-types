@@ -5,6 +5,7 @@ declare namespace Timeline {
     let playback_speed: number
     let time: number
     let playing: boolean
+    let vue:Vue
 
     /**
      * Set the timeline to a specific time

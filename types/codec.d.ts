@@ -2,7 +2,7 @@ interface CodecOptions {
 	name: string
 	load?(model: any, file: object, add?: boolean): void
 	compile?(): void
-	parse?(): void
+	parse?(model:string,path:string): void
 	export?(): void
 	/**
 	 * Generate a file name to suggest when exporting
@@ -31,7 +31,7 @@ declare class Codec extends Deletable {
 
 	load?(model: any, file: object, add?: boolean): void
 	compile?(): any
-	parse?(model): void
+	parse?(model:string,path:string): void
 	export?(): void
 	/**
 	 * Generate a file name to suggest when exporting

@@ -1,11 +1,11 @@
 /// <reference types="three" />
 
 interface TextureData {
-	path?: string
-	name?: string
-	folder?: string
-	namespace?: string
-	id?: string
+    path?: string
+    name?: string
+    folder?: string
+    namespace?: string
+    id?: string
     particle?: boolean
     visible?: boolean
     mode?: string
@@ -41,6 +41,9 @@ declare class Texture {
     readonly frameCount: number | undefined;
     readonly display_height: number;
     readonly ratio: number;
+    name: string;
+    width: number;
+    height: number;
 
     getErrorMessage(): string;
     extend(data: TextureData): this;
@@ -48,9 +51,9 @@ declare class Texture {
      * Loads the texture from it's current source
      * @param cb Callback function
      */
-    load(cb?: () => {}): this;
+    load(cb?: (scope:this) => void): this;
     fromJavaLink(link: string, path_array: string[]): this;
-    fromFile(file: {name: string, content?: string, path: string}): this;
+    fromFile(file: { name: string, content?: string, path: string }): this;
     fromPath(path: string): this;
     fromDataURL(data_url: string): this;
     fromDefaultPack(): true | undefined;
@@ -120,7 +123,7 @@ declare class Texture {
      * @param callback 
      * @param options Editing options
      */
-    edit(callback: (instance: HTMLCanvasElement | object) => void | HTMLCanvasElement, options: TextureEditOptions): void;
+    edit(callback: (instance: HTMLCanvasElement | object) => void | HTMLCanvasElement, options?: TextureEditOptions): void;
     menu: Menu
 
     static all: Texture[]
