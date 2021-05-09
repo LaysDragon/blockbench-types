@@ -34,6 +34,8 @@ interface BarItemOptions extends KeybindItemOptions {
     keybind?: Keybind
 }
 declare class BarItem extends KeybindItem {
+    id:string;
+    toolbars:Toolbar[];
     constructor(id: string, options: BarItemOptions);
     click(event?: Event): void
     conditionMet(): boolean;

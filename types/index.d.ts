@@ -221,7 +221,7 @@ interface PanelOptions {
 	insert_before: any
 	insert_after: any
 }
-declare class Panel {
+declare class Panel extends Deletable {
 	constructor(options: Partial<PanelOptions>);
 	toolbars: Record<string, Toolbar>;
 }

@@ -87,6 +87,7 @@ declare class Group extends OutlinerNode {
 	static selected: Group
 	static all: Group[]
 
+	icon:string
 	name: string
 	children: OutlinerNode[]
 	reset: boolean
