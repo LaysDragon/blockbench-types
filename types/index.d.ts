@@ -201,6 +201,8 @@ interface PluginData {
 
 declare class Plugin {
 	static register(id: string, data: PluginData): Plugin
+	reload():this;
+	uninstall():this;
 	constructor()
 }
 
