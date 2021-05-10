@@ -19,6 +19,7 @@ interface FormatOptions {
 	uv_rotation?: boolean
 	display_mode?: boolean
 	animation_mode?: boolean
+	animation_files?: boolean
 
 	codec?: Codec
 	onActivation?(): void
@@ -48,6 +49,7 @@ declare class ModelFormat extends Deletable {
 	uv_rotation: boolean
 	display_mode: boolean
 	animation_mode: boolean
+	animation_files: boolean
 
 	/**
 	 * Selects the format
