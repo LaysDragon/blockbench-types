@@ -134,3 +134,5 @@ declare let Toolbars: Record<string, Toolbar>
 
 
 declare let updateNslideValues:()=>void;
+
+declare const textures:Texture[];
