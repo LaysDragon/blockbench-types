@@ -133,6 +133,20 @@ declare let Formats: {
 declare let Toolbars: Record<string, Toolbar>
 
 
-declare let updateNslideValues:()=>void;
+declare let updateNslideValues: () => void;
 
-declare const textures:Texture[];
+declare const textures: Texture[];
+
+
+declare function addRecentProject(data: { name: string, path: string, icon: string }): void;
+
+
+declare namespace ModelMeta {
+    let name: string;
+    let saved: boolean;
+    let save_path: string;
+    let export_path: string;
+    let animation_path: string;
+}
+
+declare function pathToName(path: string, extension: boolean): string;

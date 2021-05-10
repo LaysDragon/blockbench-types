@@ -1,8 +1,9 @@
+/// <reference types="./file_system" />
 interface CodecOptions {
 	name: string
-	load?(model: any, file: object, add?: boolean): void
+	load?(model: string, file: Blockbench.FileResult & { no_file?: boolean }, add?: boolean): void
 	compile?(): void
-	parse?(model:string,path:string): void
+	parse?(model: string, path: string): void
 	export?(): void
 	/**
 	 * Generate a file name to suggest when exporting
@@ -29,9 +30,9 @@ interface CodecOptions {
 declare class Codec extends Deletable {
 	constructor(id: string, options: CodecOptions)
 
-	load?(model: any, file: object, add?: boolean): void
+	load?(model: string, file: Blockbench.FileResult & { no_file?: boolean }, add?: boolean): void
 	compile?(): any
-	parse?(model:string,path:string): void
+	parse?(model: string, path: string): void
 	export?(): void
 	/**
 	 * Generate a file name to suggest when exporting
@@ -44,7 +45,7 @@ declare class Codec extends Deletable {
 	on(event_name: string, callback: (data: object) => void): void
 	removeListener(event_name: string, callback: (data: object) => void): void
 	dispatchEvent(data: object): void
-	
+
 	name: string
 	extension: string
 	remember: boolean

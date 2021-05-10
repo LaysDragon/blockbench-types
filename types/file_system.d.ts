@@ -11,7 +11,7 @@ declare namespace Blockbench {
 
 
 
-    interface FileResult {
+    export interface FileResult {
         name: string
         path: string
         content: string | ArrayBuffer

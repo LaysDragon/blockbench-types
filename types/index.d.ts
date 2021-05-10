@@ -20,6 +20,7 @@
 /// <reference types="./util" />
 /// <reference types="./patch" />
 /// <reference types="./global" />
+/// <reference types="./file_system" />
 /// <reference types="./lib/lib.dom" />
 /// <reference types="./lib/lib.dom.iterable" />
 
