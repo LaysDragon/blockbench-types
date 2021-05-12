@@ -220,7 +220,7 @@ interface PanelOptions {
 	onResize: () => void
 	toolbars: object
 	component: Vue.Component
-	default_side: any
+	default_side: 'left'|'right'
 	insert_before: any
 	insert_after: any
 }
