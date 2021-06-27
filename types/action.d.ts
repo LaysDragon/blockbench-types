@@ -107,6 +107,7 @@ declare class BarSlider extends Widget {
 }
 declare class BarSelect extends Widget {
     constructor(id: string, options: object);
+    value:any;
     open(event: Event): void;
     trigger(event: Event): boolean | undefined;
     change(event: Event): this;

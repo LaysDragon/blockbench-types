@@ -1,5 +1,8 @@
 declare class KeyframeDataPoint {
     constructor(keyframe: Keyframe);
+
+    keyframe: Keyframe
+    
     extend(data: any): void;
     getUndoCopy(): {};
 }

@@ -36,5 +36,5 @@ declare function convertTouchEvent(event: MouseEvent): MouseEvent
 declare function addEventListeners(element: HTMLElement, events: string, func: (event: Event) => void, option?: any)
 
 declare function trimFloatNumber(value: number): string
-declare function getAxisLetter(axisNumber: number): string
+declare function getAxisLetter(axisNumber: number): axisLetter
 declare function getAxisNumber(axisLetter: string): number
